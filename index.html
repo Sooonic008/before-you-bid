@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Before You Bid</title>
+<meta name="description" content="Paste a freelance job post and see in one second whether it is worth one of your applications.">
+<style>
+  :root { --bg:#f7f6f2; --card:#fff; --ink:#1c1c1a; --muted:#6b6a65; --line:#e3e1da;
+          --apply:#1f7a4d; --think:#b7791f; --skip:#b42318; --quote:#f1f0eb; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  header { max-width:1100px; margin:0 auto; padding:28px 20px 8px; }
+  h1 { margin:0; font-size:28px; letter-spacing:-.01em; }
+  header p { margin:4px 0 0; color:var(--muted); }
+  main { max-width:1100px; margin:0 auto; padding:16px 20px 40px; display:grid; gap:20px;
+         grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  @media (max-width:820px) { main { grid-template-columns:1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; }
+  label { display:block; font-weight:600; font-size:14px; margin:0 0 6px; }
+  input, textarea { width:100%; font:inherit; border:1px solid var(--line); border-radius:8px; padding:10px; background:#fff; }
+  textarea { min-height:340px; resize:vertical; }
+  .row { display:grid; grid-template-columns:2fr 1fr; gap:12px; margin-bottom:14px; }
+  .verdict { border-radius:12px; padding:18px; color:#fff; font-size:22px; font-weight:700; }
+  .verdict small { display:block; font-size:14px; font-weight:400; opacity:.92; margin-top:2px; }
+  .v-apply { background:var(--apply); } .v-think { background:var(--think); } .v-skip { background:var(--skip); }
+  .v-empty { background:#fff; color:var(--muted); border:1px dashed var(--line); font-weight:500; font-size:16px; }
+  .question { border-left:4px solid var(--ink); }
+  .question h2, .findings h2, .skills h2 { font-size:15px; margin:0 0 8px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .question p { margin:0; font-size:17px; }
+  ul { list-style:none; margin:0; padding:0; }
+  li { padding:10px 0; border-top:1px solid var(--line); }
+  li:first-child { border-top:0; }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:8px; }
+  .s-skip { background:var(--skip); } .s-think { background:var(--think); }
+  blockquote { margin:6px 0 0; padding:8px 10px; background:var(--quote); border-radius:6px; color:#3d3c38; font-size:14px; }
+  .tags span { display:inline-block; padding:3px 9px; margin:0 6px 6px 0; border-radius:999px; font-size:14px; border:1px solid var(--line); }
+  .tags .hit { background:#e8f3ec; border-color:#bfdccb; }
+  .stack { display:grid; gap:14px; align-content:start; }
+  .hidden { display:none; }
+  footer { max-width:1100px; margin:0 auto; padding:0 20px 30px; color:var(--muted); font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Before You Bid</h1>
+  <p>Paste a freelance job post. See in one second whether it is worth one of your applications - and what the client wants answered.</p>
+</header>
+<main>
+  <section class="card">
+    <div class="row">
+      <div><label for="skills">Your skills (comma separated)</label>
+        <input id="skills" placeholder="n8n, Python, Shopify"></div>
+      <div><label for="rate">Your minimum rate per hour</label>
+        <input id="rate" type="number" min="0" placeholder="40"></div>
+    </div>
+    <label for="post">Job post</label>
+    <textarea id="post" placeholder="Paste the full job post here (German or English)."></textarea>
+  </section>
+  <section class="stack" aria-live="polite">
+    <div id="verdict" class="verdict v-empty">Paste a job post to see the verdict.</div>
+    <div id="question" class="card question hidden"><h2>Answer this first</h2><p id="question-text"></p></div>
+    <div id="findings" class="card findings hidden"><h2>Findings</h2><ul id="findings-list"></ul></div>
+    <div id="skills-card" class="card skills hidden"><h2>Your skills in this post</h2><div id="skill-tags" class="tags"></div></div>
+  </section>
+</main>
+<footer>Runs entirely in your browser. The post is never stored or sent anywhere. Checks German and English posts.</footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>
